@@ -26,6 +26,9 @@ public class Order {
 
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany()
+    @JoinTable(name = "orders_products", joinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "id")}
+            , inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
+    @JoinColumn(name = "products_id")
     private List<Product> products;
 }

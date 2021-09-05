@@ -9,14 +9,10 @@ import ru.itis.technocrats_test.model.Product;
 import ru.itis.technocrats_test.repository.OrderRepository;
 import ru.itis.technocrats_test.repository.ProductRepository;
 
-import static ru.itis.technocrats_test.dto.ProductDto.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -50,14 +46,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDto> getAllOrdersBetweenDate(String date1, String date2) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        formatter = formatter.withLocale(Locale.ROOT );
+        formatter = formatter.withLocale(Locale.ROOT);
         LocalDate localDate1 = LocalDate.parse(date1, formatter);
         LocalDate localDate2 = LocalDate.parse(date2, formatter);
         return OrderDto.from(orderRepository.findAllByCreatedOnBetween(localDate1, localDate2));
     }
 
-//    @Override
-//    public List<Order> findAllByProductsContains(String article) {
-//        return orderRepository.findAllByOrderAndProductsContains(article);
-//    }
+    @Override
+    public List<OrderDto> findProductsByArticle(String article) {
+        List<Product> products = productRepository.findProductsByArticle(article);
+        System.out.println(Arrays.toString(products.toArray()));
+        return OrderDto.from(orderRepository.findOrdersByProductsIn(products));
+    }
 }

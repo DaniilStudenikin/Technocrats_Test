@@ -13,5 +13,5 @@ public interface OrderService {
     void create(OrderDto orderDto);
     List<OrderDto> getAllByEmail(String email);
     List<OrderDto> getAllOrdersBetweenDate(String date1, String date2);
-//    List<Order> findAllByProductsContains(String article);
+    List<OrderDto> findProductsByArticle(String article);
 }

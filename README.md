@@ -1,2 +1,2 @@
 # Technocrats_Test
-![alt text](https://imgur.com/Yi9XRlk)
+![alt tag](https://imgur.com/Yi9XRlk)
